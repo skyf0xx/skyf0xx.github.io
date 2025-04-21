@@ -118,6 +118,15 @@ li {
     display: none;
 }
 
+.nav a.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.nav a.active::after {
+    width: 100%;
+}
+
 @media (min-width: 768px) {
     .nav {
         display: flex;
