@@ -7,22 +7,37 @@
     <title>William Gikandi - Technology Leader</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #3e3f97;
-            --secondary-color: #6c63ff;
-            --dark-color: #333;
-            --light-color: #f4f4f8;
-            --success-color: #28a745;
-            --text-color: #333;
-            --light-text: #777;
-            --border-color: #ddd;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        * {
+        /* Modern CSS Reset */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        /* Variables */
+        :root {
+            --primary-color: #3e3f97;
+            --primary-light: #5152b5;
+            --secondary-color: #6c63ff;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --success-color: #28a745;
+            --text-color: #333;
+            --light-text: #6c757d;
+            --border-color: #dee2e6;
+            --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            --container-width: 1200px;
+            --sidebar-width: 280px;
+            --header-height: 60px;
+        }
+
+        /* Base Styles */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--header-height) + 20px);
         }
 
         body {
@@ -30,39 +45,147 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-color);
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 0;
+            overflow-x: hidden;
         }
 
         a {
             color: var(--primary-color);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
 
         a:hover {
             color: var(--secondary-color);
         }
 
-        .container {
-            padding: 2rem;
-            background: white;
-            box-shadow: var(--box-shadow);
-            margin: 2rem auto;
-            border-radius: 5px;
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            color: var(--dark-color);
         }
 
-        header {
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            background: white;
+            box-shadow: var(--box-shadow);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .main-content {
+            padding: 2rem;
+            position: relative;
+        }
+
+        @media (min-width: 992px) {
+            .cv-grid {
+                display: grid;
+                grid-template-columns: var(--sidebar-width) 1fr;
+                min-height: 100vh;
+            }
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            height: var(--header-height);
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
+        }
+
+        .nav {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav {
+                display: flex;
+                gap: 1.5rem;
+                justify-content: center;
+            }
+        }
+
+        .nav a {
+            color: var(--dark-color);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-nav-toggle {
+            display: block;
+            position: fixed;
+            right: 1rem;
+            top: 1rem;
+            z-index: 200;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        @media (min-width: 768px) {
+            .mobile-nav-toggle {
+                display: none;
+            }
+        }
+
+        /* Header & Profile */
+        .header {
             text-align: center;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
+            padding: 3rem 1.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
         }
 
         .profile-header {
-            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -71,95 +194,127 @@
         .name {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
+            color: white;
         }
 
         .title {
             font-size: 1.3rem;
-            color: var(--light-text);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 1.5rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-item i {
-            color: var(--primary-color);
+            font-weight: 400;
         }
 
         .tagline {
             max-width: 800px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-style: italic;
-            color: var(--light-text);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .open-to-work {
             background-color: var(--success-color);
             color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
             font-size: 0.9rem;
-            margin-top: 1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        section {
-            margin: 3rem 0;
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+        }
+
+        @media (max-width: 991px) {
+            .sidebar {
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+            position: relative;
         }
 
         .section-title {
             font-size: 1.8rem;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .about-text {
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .skills-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .skills-category {
+        .section-title::after {
+            content: '';
             flex: 1;
-            min-width: 250px;
-            background-color: var(--light-color);
-            padding: 1.5rem;
-            border-radius: 5px;
-            box-shadow: var(--box-shadow);
+            height: 2px;
+            background: linear-gradient(to right, var(--border-color), transparent);
+            margin-left: 0.5rem;
+        }
+
+        /* About Section */
+        .about-text {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text strong {
+            color: var(--primary-color);
+        }
+
+        /* Skills Section */
+        .skills-category {
+            margin-bottom: 2rem;
         }
 
         .skills-category h3 {
             margin-bottom: 1rem;
             color: var(--primary-color);
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
 
         .skills-list {
             list-style-type: none;
+            padding-left: 0;
         }
 
         .skills-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
+            gap: 0.5rem;
         }
 
         .skills-list li::before {
@@ -168,21 +323,28 @@
             font-weight: bold;
             display: inline-block;
             width: 1em;
-            margin-left: -1em;
         }
 
-        .experience-item,
-        .education-item,
-        .project-item {
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
+        /* Experience Section */
+        .experience-card,
+        .education-card,
+        .project-card,
+        .recommendation {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
         }
 
-        .experience-item:last-child,
-        .education-item:last-child,
-        .project-item:last-child {
-            border-bottom: none;
+        .experience-card:hover,
+        .education-card:hover,
+        .project-card:hover,
+        .recommendation:hover {
+            box-shadow: var(--box-shadow);
+            transform: translateY(-2px);
         }
 
         .job-title,
@@ -199,61 +361,57 @@
         .project-association {
             font-size: 1.1rem;
             color: var(--primary-color);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
             font-weight: 500;
         }
 
         .date-location {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             color: var(--light-text);
             font-size: 0.9rem;
-        }
-
-        .job-description,
-        .education-description,
-        .project-description {
-            margin-top: 1rem;
-        }
-
-        .job-description ul,
-        .project-description ul {
-            padding-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .job-description li,
-        .project-description li {
-            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .tech-used {
+            display: inline-block;
             font-style: italic;
             color: var(--light-text);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            background: var(--light-color);
+            padding: 0.3rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
         }
 
-        .recommendations {
+        /* Recommendations */
+        .recommendations-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .recommendation {
-            background-color: var(--light-color);
-            padding: 1.5rem;
-            border-radius: 5px;
-            box-shadow: var(--box-shadow);
+            gap: 1.5rem;
         }
 
         .recommendation-text {
             font-style: italic;
             margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .recommendation-text::before {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            opacity: 0.1;
+            color: var(--primary-color);
         }
 
         .recommender {
             font-weight: 600;
+            margin-bottom: 0.25rem;
         }
 
         .recommender-title {
@@ -261,10 +419,11 @@
             color: var(--light-text);
         }
 
+        /* Footer */
         footer {
             text-align: center;
-            margin-top: 3rem;
-            padding: 1.5rem 0;
+            padding: 2rem;
+            background: var(--light-color);
             color: var(--light-text);
             border-top: 1px solid var(--border-color);
         }
@@ -279,44 +438,96 @@
         .social-links a {
             font-size: 1.5rem;
             color: var(--primary-color);
-            transition: color 0.3s, transform 0.3s;
+            transition: var(--transition);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .social-links a:hover {
             color: var(--secondary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
-        .github-link {
-            color: var(--light-text);
-            font-size: 0.9rem;
+        /* Print Styles */
+        @media print {
+
+            body,
+            html {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .nav-container,
+            .mobile-nav-toggle {
+                display: none !important;
+            }
+
+            .cv-grid {
+                display: block;
+            }
+
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            a {
+                text-decoration: none;
+                color: var(--dark-color);
+            }
+
+            .open-to-work {
+                border: 1px solid black;
+            }
+
+            .header {
+                background: white;
+                color: black;
+                padding: 1rem;
+            }
+
+            .name,
+            .title {
+                color: black;
+            }
+
+            .tagline {
+                color: var(--light-text);
+            }
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .container {
-                padding: 1.5rem;
-                margin: 1rem;
+                margin: 0;
+                border-radius: 0;
             }
 
             .name {
                 font-size: 2rem;
             }
 
-            .contact-info {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-
-            .skills-container {
-                flex-direction: column;
-            }
-
             .date-location {
                 flex-direction: column;
+                align-items: flex-start;
                 gap: 0.25rem;
             }
 
-            .recommendations {
+            .recommendations-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -324,11 +535,37 @@
 </head>
 
 <body>
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#projects">Projects</a>
+            <a href="#publications">Publications</a>
+            <a href="#recommendations">Recommendations</a>
+        </nav>
+    </div>
+
+    <button class="mobile-nav-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <div class="container">
-        <header>
+        <header class="header">
             <div class="profile-header">
                 <h1 class="name">WILLIAM GIKANDI</h1>
                 <h2 class="title">Software Engineer</h2>
+                <p class="tagline">Boosting Reliability | Maximising Productivity | Pioneering System Efficiencies</p>
+                <div class="open-to-work">
+                    <i class="fas fa-briefcase"></i> Open to CTO and Software Engineering roles
+                </div>
+            </div>
+        </header>
+
+        <div class="cv-grid">
+            <aside class="sidebar">
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
@@ -352,265 +589,57 @@
                         <a href="https://github.com/skyf0xx" target="_blank">github.com/skyf0xx</a>
                     </div>
                 </div>
-                <p class="tagline">Boosting Reliability | Maximising Productivity | Pioneering System Efficiencies</p>
-                <div class="open-to-work">
-                    <i class="fas fa-briefcase"></i> Open to CTO and Software Engineering roles
-                </div>
-            </div>
-        </header>
 
-        <section id="about">
-            <h2 class="section-title">About</h2>
-            <p class="about-text">
-                <strong>Multi-lingual, commercially astute, tech-savvy</strong> business transformation architect with a
-                Master of Science
-                qualification and Microsoft certifications. I have over 15 years of international experience (US, UK,
-                Africa, Australia)
-                with a proven track record of driving automation projects and building comprehensive systems and
-                processes that increase
-                efficiency, improve productivity, reduce costs and positively impact bottom-line results.
-            </p>
-            <p class="about-text">
-                <strong>Strategic</strong>, highly analytical, energetic, engaging, and quick thinking with strong
-                interpersonal skills.
-                I can translate complex information for non-technical audiences and am proficient at collaborating with
-                stakeholders,
-                C-level executives, business units and end-users to secure consensus, facilitate change and ensure
-                applications, systems
-                infrastructure and technology add value.
-            </p>
-            <p class="about-text">
-                <strong>I like to build things that work.</strong> I have a knack for seeing patterns and extracting
-                simplicity from the
-                complex,
-                making processes flow in the best way possible.
-            </p>
-        </section>
-
-        <section id="skills">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="skills-container">
-                <div class="skills-category">
-                    <h3>Programming & Development</h3>
-                    <ul class="skills-list">
-                        <li>PHP / HTML5 / CSS5</li>
-                        <li>JavaScript / Node.js / React/ Typescript</li>
-                        <li>Lua</li>
-                        <li>MySQL / PostgreSQL / MongoDB</li>
-                        <li>REST APIs / GraphQL</li>
-                        <li>Blockchain Development</li>
-                    </ul>
-                </div>
-                <div class="skills-category">
-                    <h3>Technical Skills</h3>
-                    <ul class="skills-list">
-                        <li>Microservices Architecture</li>
-                        <li>Agent Oriented Architecture</li>
-                        <li>Object-Oriented Programming</li>
-                        <li>Data Modeling</li>
-                        <li>GitHub / Version Control</li>
-                        <li>Genetic Algorithms / Matlab</li>
-                    </ul>
-                </div>
-                <div class="skills-category">
-                    <h3>Business & Management</h3>
-                    <ul class="skills-list">
-                        <li>Token Economics</li>
-                        <li>DeFi & Blockchain Strategy</li>
-                        <li>Project Management</li>
-                        <li>Business Process Design</li>
-                        <li>Stakeholder Communications</li>
-                        <li>Team Leadership</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience">
-            <h2 class="section-title">Professional Experience</h2>
-
-            <div class="experience-item">
-                <h3 class="job-title">Chief Technology Officer (Founder)</h3>
-                <p class="company">Mithril Labs</p>
-                <div class="date-location">
-                    <span>December 2024 - Present</span>
-                    <span>Remote</span>
-                </div>
-                <p class="tech-used">Lua, Typescript, React, NodeJS, NextJS</p>
-                <p class="job-description">
-                    AO is a decentralized compute system where countless parallel processes interact within a
-                    single, cohesive environment.
-                </p>
-                <ul>
-                    <li>Launched Mithril Labs, a startup focusing on rapid prototyping of DeFi applications on AO</li>
-                    <li>Created MINT Protocol - a single sided liquidity provision protocol</li>
-                    <li>Launched NAB - an upwardly stable Floor Adaptive Elastic Stablecoin</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3 class="job-title">Head of Research And Tech Ops / Head of DeFi and Strategy</h3>
-                <p class="company">Sacred Protocol</p>
-                <div class="date-location">
-                    <span>March 2022 - January 2025</span>
-                    <span>Remote</span>
-                </div>
-                <p class="tech-used">Lua, Typescript, NodeJS, NextJS, NestJS</p>
-                <p class="job-description">
-                    Sacred Protocol is a cutting-edge, web3 platform that fosters horizontal, inclusive, and effective
-                    communities.
-                <ul>
-                    <li>Developed and honed the technical requirements for mutiple products</li>
-                    <li>Implemented AI into our products</li>
-                    <li>Led project management and dev ops</li>
-                    <li>Led research and implementation of different technologies into Sacred's products</li>
-                    <li>Performed user interviews and conducted market research to get Sacred to Product Market Fit</li>
-                </ul>
-                </p>
-            </div>
-
-            <div class="experience-item">
-                <h3 class="job-title">Contributor</h3>
-                <p class="company">Australian DeFi Association</p>
-                <div class="date-location">
-                    <span>January 2022 - Current</span>
-                    <span>Part-time</span>
-                </div>
-                <p class="job-description">
-                    A not-for-profit group focused on providing educational resources and news updates from the world of
-                    blockchain, DeFi, web 3.0, and all things crypto.
-                </p>
-                <ul>
-                    <li>Guest spots on twitter and youtube</li>
-                    <li>Ran interviews with submect matter experts</li>
-                    <li>Talks on in-person events</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3 class="job-title">Chief Technology Officer</h3>
-                <p class="company">Kin Ecosystem</p>
-                <div class="date-location">
-                    <span>March 2021 - March 2022</span>
-                    <span>Remote</span>
-                </div>
-                <p class="tech-used">Typescript, NodeJS, React, Kotlin, Python, Google Data Studio</p>
-                <p class="job-description">
-                    Kik Inc received a $50 million investment from Chinese Internet giant Tencent, giving the company a
-                    billion-dollar valuation. Led the technical development and implementation of the Kin cryptocurrency
-                    ecosystem.
-                </p>
-                <ul>
-                    <li>Led the development and implementation of SDKs for the Kin ecosystem</li>
-                    <li>Worked with stakeholders to create developer tools and tutorials</li>
-                    <li>Led the economic development and maintenanceof the Kin ecosystem</li>
-                    <li>Led online developer conferences for feedback collection</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3 class="job-title">Software Engineer</h3>
-                <p class="company">Lend Capital Pty Ltd</p>
-                <div class="date-location">
-                    <span>February 2020 - March 2021</span>
-                    <span>Melbourne, Victoria, Australia</span>
-                </div>
-                <p class="tech-used">PHP, Node.js, Typescript, ReactJS, VueJS MySQL, GraphQL, MongoDB</p>
-                <p class="job-description">
-                    Part of a team that designed, developed, and maintained B2B software for Australia's most
-                    sophisticated broker platform, helping small businesses tap into the country's billion-dollar
-                    alternative loans market.
-                <ul>
-                    <li>Developed API producers and consumers</li>
-                    <li>Built microservices on Amazon Lambda</li>
-                    <li>Implemented front-end technologies like React and Vue.js</li>
-                </ul>
-                </p>
-            </div>
-
-            <div class="experience-item">
-                <h3 class="job-title">Programmer / Dev Tech Support</h3>
-                <p class="company">Freelance</p>
-                <div class="date-location">
-                    <span>2018 - 2019</span>
-                    <span>Remote</span>
-                </div>
-                <p class="tech-used">PHP, Python, Node.js, MySQL, PostgreSQL, Javascript, Blockchain (Stellar)</p>
-                <p class="job-description">
-                <ul>
-                    <li>Developed smart contracts on IBM's Hyperledger Blockchain for Fairom</li>
-                    <li>Created several projects and tutorials for the Kin Foundation</li>
-                    <li>Published developer tutorials on Medium and StackOverflow</li>
-                    <li>Provided developer moderation and assistance on Discord</li>
-                    <li>Developed sample client apps in Unity3D and server code in Node.js and Python for developer
-                        training</li>
-                </ul>
-                </p>
-            </div>
-
-            <div class="experience-item">
-                <h3 class="job-title">Data Manager / Programmer</h3>
-                <p class="company">Rolan</p>
-                <div class="date-location">
-                    <span>2015 - 2017</span>
-                    <span>Sydney, NSW, Australia</span>
-
-                </div>
-                <p class="tech-used">PHP, Python, MySQL, Javascript, Ebay/Amazon/Google APIs, ElasticSearch</p>
-                <p class="job-description">
-                <ul>
-                    <li>Brought on board to drive the gradual automation and streamlining of sales, shipping,
-                        accounting, and stock-keeping procedures in support of the organization's extensive growth</li>
-                    <li>Optimized the end-to-end order management process, including inventory control, online listing,
-                        accounting, CRM, and shipping operations</li>
-                    <li>Implemented systems that effectively handled listings of up to 50K SKUs and maintained a
-                        database of 1.7M records</li>
-                    <li>Slashed cycle time for order processing from 20 minutes to 30 seconds per order and increased
-                        order accuracy</li>
-                </ul>
-                </p>
-            </div>
-
-            <div class="experience-item">
-                <h3 class="job-title">Earlier Positions</h3>
-                <p class="job-description">
-                <ul>
-                    <li><strong>Quality Manager</strong> at L'Oreal (2013-2015) - Led cross-functional teams in quality
-                        assurance and control activities</li>
-                    <li><strong>Quality & Process Manager</strong> at IBPL (2011-2013) - Established QA compliance
-                        targets and led ISO standards conformity efforts</li>
-                    <li><strong>Quality Head</strong> at Kensalt Limited (2009-2010) - Improved quality through tracking
-                        and reporting methods</li>
-                    <li><strong>Computer Programmer / Solutions Developer</strong> (Freelance, 2007-2009) - Developed
-                        stock trading programs and websites</li>
-                    <li><strong>Lead Programmer / Network Admin</strong> at Imperial Inc. (2004-2007) - Designed
-                        enterprise administration software</li>
-                    <li><strong>Metabolic Engineer</strong> at SUNY Buffalo, NY (2005-2006) - Performed computational
-                        analyses of metabolic processes</li>
-                </ul>
-                </p>
-            </div>
-        </section>
-
-        <section id="education">
-            <h2 class="section-title">Education</h2>
-
-            <div class="education-item">
-                <h3 class="education-degree">Master's degree, Chemical & Biological Engineering</h3>
-                <p class="school">University at Buffalo (SUNY)</p>
-                <div class="date-location">
-                    <span>2004 - 2006</span>
+                <div class="section">
+                    <h2 class="section-title">Skills</h2>
+                    <div class="skills-category">
+                        <h3>Programming & Development</h3>
+                        <ul class="skills-list">
+                            <li>PHP / HTML5 / CSS5</li>
+                            <li>JavaScript / Node.js / React/ Typescript</li>
+                            <li>Lua</li>
+                            <li>MySQL / PostgreSQL / MongoDB</li>
+                            <li>REST APIs / GraphQL</li>
+                            <li>Blockchain Development</li>
+                        </ul>
+                    </div>
+                    <div class="skills-category">
+                        <h3>Technical Skills</h3>
+                        <ul class="skills-list">
+                            <li>Microservices Architecture</li>
+                            <li>Agent Oriented Architecture</li>
+                            <li>Object-Oriented Programming</li>
+                            <li>Data Modeling</li>
+                            <li>GitHub / Version Control</li>
+                            <li>Genetic Algorithms / Matlab</li>
+                        </ul>
+                    </div>
+                    <div class="skills-category">
+                        <h3>Business & Management</h3>
+                        <ul class="skills-list">
+                            <li>Token Economics</li>
+                            <li>DeFi & Blockchain Strategy</li>
+                            <li>Project Management</li>
+                            <li>Business Process Design</li>
+                            <li>Stakeholder Communications</li>
+                            <li>Team Leadership</li>
+                        </ul>
+                    </div>
                 </div>
 
-            </div>
+                <div class="section">
+                    <h2 class="section-title">Education</h2>
+                    <div class="education-card">
+                        <h3 class="education-degree">Master's degree, Chemical & Biological Engineering</h3>
+                        <p class="school">University at Buffalo (SUNY)</p>
+                        <div class="date-location">
+                            <span>2004 - 2006</span>
+                        </div>
+                    </div>
+                </div>
 
-
-        </section>
-
-        <section id="certifications">
-            <h2 class="section-title">Certifications</h2>
-            <div class="skills-container">
-                <div class="skills-category">
+                <div class="section">
+                    <h2 class="section-title">Certifications</h2>
                     <ul class="skills-list">
                         <li>Microsoft Certified Professional: Analyzing Requirements and Defining Solution Architectures
                         </li>
@@ -619,129 +648,259 @@
                         <li>Microsoft Certified Solution Developer (MCSD)</li>
                     </ul>
                 </div>
-            </div>
-        </section>
+            </aside>
 
-        <section id="projects">
-            <h2 class="section-title">Project Samples</h2>
-
-            <div class="project-item">
-                <h3 class="project-title">Blockchain Projects</h3>
-                <span>
-                    View code samples at <a href="https://github.com/skyf0xx/"
-                        target="_blank">github.com/skyf0xx/</a></span>
-                <p class="project-description">
-                <ul>
-                    <li>
-                        <strong>AO Smart Contracts</strong> - Several protocols built in Lua on the AO / Arweave
-                        blockchain.
-                    </li>
-                    <li>
-                        <strong>Hyperledger Smart Contracts</strong> - Smart contracts to
-                        manage ownership and transfer of mobile devices on the Hyperledger blockchain
-                    </li>
-                    <li>
-                        <strong>Mobile games on the blockchain</strong> - Catpurse, a fun game built on Unity3D that
-                        connects gameplay to
-                        blockchain purchases (2019)
-                    </li>
-                    <li>
-                        <strong>Other Blockchain projects</strong> - Projects that interacted with the Kin/Stellar
-                        blockchain, including data displays, browser extensions connecting social networks to the
-                        blockchain, price tickers, and server code
-                    </li>
-                </ul>
-                </p>
-            </div>
-
-            <div class="project-item">
-                <h3 class="project-title">Trading Algorithms</h3>
-                <p class="project-description">
-                    Cryptocurrency trading algorithms that trade over short periods (approximately 10 trades/s). Built
-                    using Node.js, they search for triangular arbitrage opportunities in inefficient markets
-                </p>
-            </div>
-
-            <div class="project-item">
-                <h3 class="project-title">Rolan E-commerce Platform</h3>
-                <p class="project-description">
-                    A sales platform that uses APIs to connect to <a href="http://www.ebaystores.com.au/rolan/"
-                        target="_blank">Ebay</a>, shipping services, and internal accounting software. Once a sale is
-                    made on Ebay or the site, the API contacts shippers and warehouses to calculate the
-                    cheapest/quickest shipping location. The system also manages stocks/re-orders, manual deliveries
-                    (using TSP algorithms), and features an ElasticSearch-powered internal search engine
-                </p>
-            </div>
-
-            <div class="project-item">
-                <h3 class="project-title">Tripfelt Travel Guide</h3>
-                <p class="project-description">
-                    A travel-related site that runs on multiple social APIs (Google Maps, Facebook, Twitter, Foursquare,
-                    Youtube, etc.) to create a personalized travel guide for users
-                </p>
-            </div>
-        </section>
-
-        <section id="publications">
-            <h2 class="section-title">Publications <small>(Data Analytics)</small></h2>
-
-            <div class="project-item">
-                <h3 class="project-title">Increased Malonyl Coenzyme A Biosynthesis by Tuning the Escherichia coli
-                    Metabolic Network and Its Application to Flavanone Production</h3>
-                <div class="date-location">
-                    <span>Applied Environmental Microbiology, July 2009</span>
-                </div>
-                <p class="project-description">
-                    Identification of genetic targets able to bring about changes to the metabolite profiles of
-                    microorganisms.
-                </p>
-            </div>
-
-            <div class="project-item">
-                <h3 class="project-title">Optimization based frameworks and search methodologies for the analysis and
-                    redesign of the Escherichia coli metabolic network</h3>
-                <div class="date-location">
-                    <span>ProQuest, September 2006</span>
-                </div>
-                <p class="project-description">
-                    The central theme of this thesis covers the application of in-silico modeling methods for the
-                    prediction and optimization of metabolic networks in prokaryotic systems.
-                </p>
-            </div>
-        </section>
-
-        <section id="recommendations">
-            <h2 class="section-title">Recommendations</h2>
-
-            <div class="recommendations">
-                <div class="recommendation">
-                    <p class="recommendation-text">"Will is one of the most switched on engineers I've had the pleasure
-                        of working with. He really tackles projects with an open mind to really explore all options and
-                        find the best outcome. He communicates issues that may arise in advance, he's transparent
-                        throughout the entire development process, and he thrives when learning new technologies."</p>
-                    <p class="recommender">Jonathan Stones</p>
-                    <p class="recommender-title">Engineering Team Lead @ Xero</p>
-                </div>
-
-                <div class="recommendation">
-                    <p class="recommendation-text">"I had the greatest of privilege of working with and reporting to
-                        Will. Will is an exceptional leader. Sets achievable targets and very considerate and moderate
-                        in his reviews. He is a coach. He is not a manager but a great leader. Shows you how it is done
-                        not commanding you into doing. This among many of his leadership qualities stood out for me."
+            <main class="main-content">
+                <section id="about" class="section">
+                    <h2 class="section-title">About</h2>
+                    <p class="about-text">
+                        <strong>Multi-lingual, commercially astute, tech-savvy</strong> business transformation
+                        architect with a Master of Science qualification and Microsoft certifications. I have over 15
+                        years of international experience (US, UK, Africa, Australia) with a proven track record of
+                        driving automation projects and building comprehensive systems and processes that increase
+                        efficiency, improve productivity, reduce costs and positively impact bottom-line results.
                     </p>
-                    <p class="recommender">Fredrick Juma</p>
-                    <p class="recommender-title">Corporate R&D Systems Product Owner, Mars Inc</p>
-                </div>
+                    <p class="about-text">
+                        <strong>Strategic</strong>, highly analytical, energetic, engaging, and quick thinking with
+                        strong interpersonal skills. I can translate complex information for non-technical audiences and
+                        am proficient at collaborating with stakeholders, C-level executives, business units and
+                        end-users to secure consensus, facilitate change and ensure applications, systems infrastructure
+                        and technology add value.
+                    </p>
+                    <p class="about-text">
+                        <strong>I like to build things that work.</strong> I have a knack for seeing patterns and
+                        extracting simplicity from the complex, making processes flow in the best way possible.
+                    </p>
+                </section>
 
-                <div class="recommendation">
-                    <p class="recommendation-text">"His technical ability, eye for detail and overall understanding of
-                        operations are assets to any organization. He is able to resolve difficult problems, with his
-                        hands on approach and out of the box thinking."</p>
-                    <p class="recommender">Chandra Banerjee</p>
-                    <p class="recommender-title">Digital Marketer at Northcote South</p>
-                </div>
-            </div>
-        </section>
+                <section id="experience" class="section">
+                    <h2 class="section-title">Professional Experience</h2>
+
+                    <div class="experience-card">
+                        <h3 class="job-title">Chief Technology Officer (Founder)</h3>
+                        <p class="company">Mithril Labs</p>
+                        <div class="date-location">
+                            <span>December 2024 - Present</span>
+                            <span>Remote</span>
+                        </div>
+                        <span class="tech-used">Lua, Typescript, React, NodeJS, NextJS</span>
+                        <p>AO is a decentralized compute system where countless parallel processes interact within a
+                            single, cohesive environment.</p>
+                        <ul>
+                            <li>Launched Mithril Labs, a startup focusing on rapid prototyping of DeFi applications on
+                                AO</li>
+                            <li>Created MINT Protocol - a single sided liquidity provision protocol</li>
+                            <li>Launched NAB - an upwardly stable Floor Adaptive Elastic Stablecoin</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <h3 class="job-title">Head of Research And Tech Ops / Head of DeFi and Strategy</h3>
+                        <p class="company">Sacred Protocol</p>
+                        <div class="date-location">
+                            <span>March 2022 - January 2025</span>
+                            <span>Remote</span>
+                        </div>
+                        <span class="tech-used">Lua, Typescript, NodeJS, NextJS, NestJS</span>
+                        <p>Sacred Protocol is a cutting-edge, web3 platform that fosters horizontal, inclusive, and
+                            effective communities.</p>
+                        <ul>
+                            <li>Developed and honed the technical requirements for mutiple products</li>
+                            <li>Implemented AI into our products</li>
+                            <li>Led project management and dev ops</li>
+                            <li>Led research and implementation of different technologies into Sacred's products</li>
+                            <li>Performed user interviews and conducted market research to get Sacred to Product Market
+                                Fit</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <h3 class="job-title">Contributor</h3>
+                        <p class="company">Australian DeFi Association</p>
+                        <div class="date-location">
+                            <span>January 2022 - Current</span>
+                            <span>Part-time</span>
+                        </div>
+                        <p>A not-for-profit group focused on providing educational resources and news updates from the
+                            world of blockchain, DeFi, web 3.0, and all things crypto.</p>
+                        <ul>
+                            <li>Guest spots on twitter and youtube</li>
+                            <li>Ran interviews with submect matter experts</li>
+                            <li>Talks on in-person events</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <h3 class="job-title">Chief Technology Officer</h3>
+                        <p class="company">Kin Ecosystem</p>
+                        <div class="date-location">
+                            <span>March 2021 - March 2022</span>
+                            <span>Remote</span>
+                        </div>
+                        <span class="tech-used">Typescript, NodeJS, React, Kotlin, Python, Google Data Studio</span>
+                        <p>Kik Inc received a $50 million investment from Chinese Internet giant Tencent, giving the
+                            company a billion-dollar valuation. Led the technical development and implementation of the
+                            Kin cryptocurrency ecosystem.</p>
+                        <ul>
+                            <li>Led the development and implementation of SDKs for the Kin ecosystem</li>
+                            <li>Worked with stakeholders to create developer tools and tutorials</li>
+                            <li>Led the economic development and maintenanceof the Kin ecosystem</li>
+                            <li>Led online developer conferences for feedback collection</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <h3 class="job-title">Software Engineer</h3>
+                        <p class="company">Lend Capital Pty Ltd</p>
+                        <div class="date-location">
+                            <span>February 2020 - March 2021</span>
+                            <span>Melbourne, Victoria, Australia</span>
+                        </div>
+                        <span class="tech-used">PHP, Node.js, Typescript, ReactJS, VueJS MySQL, GraphQL, MongoDB</span>
+                        <p>Part of a team that designed, developed, and maintained B2B software for Australia's most
+                            sophisticated broker platform, helping small businesses tap into the country's
+                            billion-dollar alternative loans market.</p>
+                        <ul>
+                            <li>Developed API producers and consumers</li>
+                            <li>Built microservices on Amazon Lambda</li>
+                            <li>Implemented front-end technologies like React and Vue.js</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <h3 class="job-title">Earlier Positions</h3>
+                        <ul>
+                            <li><strong>Programmer / Dev Tech Support</strong> at Freelance (2018-2019) - Developed
+                                smart contracts and created tutorials for the Kin Foundation</li>
+                            <li><strong>Data Manager / Programmer</strong> at Rolan (2015-2017) - Automated and
+                                streamlined sales and operations processes</li>
+                            <li><strong>Quality Manager</strong> at L'Oreal (2013-2015) - Led cross-functional teams in
+                                quality assurance</li>
+                            <li><strong>Quality & Process Manager</strong> at IBPL (2011-2013) - Established QA
+                                compliance targets</li>
+                            <li><strong>Quality Head</strong> at Kensalt Limited (2009-2010) - Improved quality through
+                                tracking methods</li>
+                            <li><strong>Computer Programmer</strong> (Freelance, 2007-2009) - Developed stock trading
+                                programs</li>
+                            <li><strong>Lead Programmer / Network Admin</strong> at Imperial Inc. (2004-2007) - Designed
+                                enterprise software</li>
+                            <li><strong>Metabolic Engineer</strong> at SUNY Buffalo, NY (2005-2006) - Performed
+                                computational analyses</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="projects" class="section">
+                    <h2 class="section-title">Project Samples</h2>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Blockchain Projects</h3>
+                        <span>View code samples at <a href="https://github.com/skyf0xx/"
+                                target="_blank">github.com/skyf0xx/</a></span>
+                        <ul>
+                            <li>
+                                <strong>AO Smart Contracts</strong> - Several protocols built in Lua on the AO / Arweave
+                                blockchain.
+                            </li>
+                            <li>
+                                <strong>Hyperledger Smart Contracts</strong> - Smart contracts to manage ownership and
+                                transfer of mobile devices on the Hyperledger blockchain
+                            </li>
+                            <li>
+                                <strong>Mobile games on the blockchain</strong> - Catpurse, a fun game built on Unity3D
+                                that connects gameplay to blockchain purchases (2019)
+                            </li>
+                            <li>
+                                <strong>Other Blockchain projects</strong> - Projects that interacted with the
+                                Kin/Stellar blockchain, including data displays, browser extensions connecting social
+                                networks to the blockchain, price tickers, and server code
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Trading Algorithms</h3>
+                        <p>Cryptocurrency trading algorithms that trade over short periods (approximately 10 trades/s).
+                            Built using Node.js, they search for triangular arbitrage opportunities in inefficient
+                            markets</p>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Rolan E-commerce Platform</h3>
+                        <p>A sales platform that uses APIs to connect to <a href="http://www.ebaystores.com.au/rolan/"
+                                target="_blank">Ebay</a>, shipping services, and internal accounting software. Once a
+                            sale is made on Ebay or the site, the API contacts shippers and warehouses to calculate the
+                            cheapest/quickest shipping location. The system also manages stocks/re-orders, manual
+                            deliveries (using TSP algorithms), and features an ElasticSearch-powered internal search
+                            engine</p>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Tripfelt Travel Guide</h3>
+                        <p>A travel-related site that runs on multiple social APIs (Google Maps, Facebook, Twitter,
+                            Foursquare, Youtube, etc.) to create a personalized travel guide for users</p>
+                    </div>
+                </section>
+
+                <section id="publications" class="section">
+                    <h2 class="section-title">Publications <small>(Data Analytics)</small></h2>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Increased Malonyl Coenzyme A Biosynthesis by Tuning the Escherichia
+                            coli Metabolic Network and Its Application to Flavanone Production</h3>
+                        <div class="date-location">
+                            <span>Applied Environmental Microbiology, July 2009</span>
+                        </div>
+                        <p>Identification of genetic targets able to bring about changes to the metabolite profiles of
+                            microorganisms.</p>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Optimization based frameworks and search methodologies for the
+                            analysis and redesign of the Escherichia coli metabolic network</h3>
+                        <div class="date-location">
+                            <span>ProQuest, September 2006</span>
+                        </div>
+                        <p>The central theme of this thesis covers the application of in-silico modeling methods for the
+                            prediction and optimization of metabolic networks in prokaryotic systems.</p>
+                    </div>
+                </section>
+
+                <section id="recommendations" class="section">
+                    <h2 class="section-title">Recommendations</h2>
+
+                    <div class="recommendations-grid">
+                        <div class="recommendation">
+                            <p class="recommendation-text">"Will is one of the most switched on engineers I've had the
+                                pleasure of working with. He really tackles projects with an open mind to really explore
+                                all options and find the best outcome. He communicates issues that may arise in advance,
+                                he's transparent throughout the entire development process, and he thrives when learning
+                                new technologies."</p>
+                            <p class="recommender">Jonathan Stones</p>
+                            <p class="recommender-title">Engineering Team Lead @ Xero</p>
+                        </div>
+
+                        <div class="recommendation">
+                            <p class="recommendation-text">"I had the greatest of privilege of working with and
+                                reporting to Will. Will is an exceptional leader. Sets achievable targets and very
+                                considerate and moderate in his reviews. He is a coach. He is not a manager but a great
+                                leader. Shows you how it is done not commanding you into doing. This among many of his
+                                leadership qualities stood out for me."</p>
+                            <p class="recommender">Fredrick Juma</p>
+                            <p class="recommender-title">Corporate R&D Systems Product Owner, Mars Inc</p>
+                        </div>
+
+                        <div class="recommendation">
+                            <p class="recommendation-text">"His technical ability, eye for detail and overall
+                                understanding of operations are assets to any organization. He is able to resolve
+                                difficult problems, with his hands on approach and out of the box thinking."</p>
+                            <p class="recommender">Chandra Banerjee</p>
+                            <p class="recommender-title">Digital Marketer at Northcote South</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
 
         <footer>
             <div class="social-links">
@@ -755,6 +914,33 @@
                     target="_blank">LinkedIn profile</a>.</p>
         </footer>
     </div>
+
+    <script>
+        // Simple toggle for mobile navigation
+        document.querySelector('.mobile-nav-toggle').addEventListener('click', function () {
+            const nav = document.querySelector('.nav');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
