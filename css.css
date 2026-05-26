@@ -43,6 +43,21 @@
       z-index: 0;
     }
 
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(200, 185, 122, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 185, 122, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     nav {
       position: relative;
       z-index: 1;
@@ -66,6 +81,52 @@
       z-index: 1;
       padding: 5rem 2rem 4rem;
       max-width: 900px;
+    }
+
+    /* scanlines over hero only */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.12) 3px,
+        rgba(0, 0, 0, 0.12) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-tag,
+    .hero-headline,
+    .hero-type-line,
+    .hero-sub,
+    .hero-actions {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* typewriter line */
+    .hero-type-line {
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+      min-height: 1.4em;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+
+    .hero-type-prompt {
+      color: rgba(200, 185, 122, 0.35);
+      user-select: none;
+    }
+
+    .hero-type-text {
+      color: var(--text);
     }
 
     .hero-tag {
