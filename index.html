@@ -40,6 +40,11 @@
             <h1 class="hero-headline fade-in d2">
                 I build things<br>that <em>work.</em><span class="cursor"></span>
             </h1>
+            <div class="vt-type-line">
+                <span class="vt-type-prompt">~/stack $</span>
+                <span class="vt-type-text" id="typeTarget"></span>
+                <span class="vt-type-cursor"></span>
+            </div>
             <p class="hero-sub fade-in d3">
                 Code is a means to an end. I've founded DeFi protocols, shipped full-stack features at scale, and
                 everything in
@@ -302,6 +307,43 @@
                     details.classList.toggle('open');
                 });
             });
+        </script>
+
+        <script>
+            const phrases = [
+                'NextJS · TypeScript · React Native',
+                'PostgreSQL · Redis · Kafka · Temporal',
+                'Astro · NestJS · NodeJS · GraphQL',
+                'AO Blockchain · Lua · DeFi protocols',
+                'Turborepo · PostGIS · Serverless AWS',
+            ];
+
+            let phraseIdx = 0;
+            let charIdx = 0;
+            let deleting = false;
+            let pause = 0;
+            const el = document.getElementById('typeTarget');
+
+            function tick() {
+                const current = phrases[phraseIdx];
+                if (pause > 0) { pause--; setTimeout(tick, 80); return; }
+                if (!deleting) {
+                    el.textContent = current.slice(0, charIdx + 1);
+                    charIdx++;
+                    if (charIdx === current.length) { deleting = true; pause = 28; }
+                    setTimeout(tick, 55);
+                } else {
+                    el.textContent = current.slice(0, charIdx - 1);
+                    charIdx--;
+                    if (charIdx === 0) {
+                        deleting = false;
+                        phraseIdx = (phraseIdx + 1) % phrases.length;
+                        pause = 5;
+                    }
+                    setTimeout(tick, 30);
+                }
+            }
+            tick();
         </script>
 
     </div>
