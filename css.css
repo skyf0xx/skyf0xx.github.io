@@ -169,6 +169,7 @@
       line-height: 1.8;
       color: var(--text-muted);
       max-width: 520px;
+      margin-top: 3rem;
       margin-bottom: 3rem;
     }
 
@@ -231,6 +232,37 @@
       animation: blink 1s step-end infinite;
       vertical-align: text-bottom;
       margin-left: 2px;
+    }
+
+    /* TYPEWRITER LINE */
+    .vt-type-line {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+      min-height: 1.4em;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+
+    .vt-type-prompt {
+      color: rgba(212,196,106,0.4);
+      user-select: none;
+    }
+
+    .vt-type-text {
+      color: var(--text);
+    }
+
+    .vt-type-cursor {
+      display: inline-block;
+      width: 7px;
+      height: 1em;
+      background: var(--gold);
+      animation: blink 0.9s step-end infinite;
+      vertical-align: text-bottom;
     }
 
     @keyframes blink {
