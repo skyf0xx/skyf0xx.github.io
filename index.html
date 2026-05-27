@@ -58,7 +58,7 @@
 
         <div class="gh-wall-wrap fade-in d5">
             <div class="gh-label">Github</div>
-            <img src="https://ghchart.rshah.org/skyf0xx" alt="GitHub Contributions Chart" class="gh-grid">
+            <img src="https://ghchart.rshah.org/skyf0xx" alt="GitHub Contributions Chart" class="gh-grid gh-wall">
         </div>
 
         <section id="work">
@@ -312,6 +312,17 @@
                 });
             });
         </script>
+        <!-- Remove type="module" from both tags -->
+        <script src="https://unpkg.com/powerglitch@latest/dist/powerglitch.min.js"></script>
+        <script>
+            PowerGlitch.glitch('.gh-wall', {
+                "timing": {
+                    "duration": 10_000
+                }
+            });
+        </script>
+
+
 
         <script>
             const phrases = [
